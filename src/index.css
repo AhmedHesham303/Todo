@@ -1,1 +1,8 @@
 @import "tailwindcss";
+@layer base {
+  body {
+    background: url("/src/assets/background-img-light.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
