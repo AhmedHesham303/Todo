@@ -1,8 +1,11 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "font-josefin", sans-serif;
+}
 @layer base {
   body {
-    background: url("/src/assets/background-img-light.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+    @apply bg-cover bg-no-repeat flex justify-center items-center;
+    background-image: url("/src/assets/background-img-light.jpg");
   }
 }
