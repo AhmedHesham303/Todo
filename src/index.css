@@ -5,7 +5,7 @@
 }
 @layer base {
   body {
-    @apply bg-cover bg-no-repeat flex justify-center items-center;
+    @apply bg-contain bg-no-repeat flex justify-center items-center;
     background-image: url("/src/assets/background-img-light.jpg");
   }
 }
