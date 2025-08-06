@@ -7,5 +7,16 @@
   body {
     @apply bg-contain bg-no-repeat flex justify-center items-center;
     background-image: url("/src/assets/background-img-light.jpg");
+    background-color: yellow;
+  }
+  .dark body {
+    background-image: url("/src/assets/Bitmap.jpg");
+    background-color: black;
+  }
+  h1 {
+    @apply text-white;
+  }
+  .dark h1 {
+    @apply text-black bg-white;
   }
 }
