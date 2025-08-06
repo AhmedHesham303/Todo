@@ -2,7 +2,7 @@ import TodosList from "./components/TodosList";
 import Header from "./components/Header";
 function App() {
   return (
-    <div className="container w-[34rem] flex items-center justify-center">
+    <div className="container w-[34rem] flex flex-col items-center justify-center">
       <Header />
       <TodosList />
     </div>

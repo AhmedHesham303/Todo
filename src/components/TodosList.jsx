@@ -1,9 +1,10 @@
+import TodoRowHeader from "./TodoRowHeader";
 import TodoRow from "./TodoRow";
 
 function TodosList() {
   return (
-    <div className="">
-      <TodoRow />
+    <div className="w-full">
+      <TodoRowHeader />
       <TodoRow />
       <TodoRow />
       <TodoRow />
