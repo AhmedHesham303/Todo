@@ -1,15 +1,25 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { readTodos } from "../services/todos";
-function TodoRowHeader({ addTodo, onShowTodos }) {
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createTodos } from "../services/todos";
+function TodoRowHeader({ onShowTodos }) {
   const [inputValue, setValue] = useState("");
 
   function handleKeyDown(e) {
     if (e.key === "Enter") {
-      addTodo(inputValue);
+      createdTodo.mutate(inputValue);
       setValue("");
     }
   }
+  const queryClient = useQueryClient();
+
+  const createdTodo = useMutation({
+    mutationFn: createTodos,
+    onSuccess: (newTodo) => {
+      queryClient.setQueryData(["todos"], (oldTodos) => {
+        return oldTodos ? [...oldTodos, newTodo] : [newTodo];
+      });
+    },
+  });
 
   return (
     <div className="flex items-center justify-between h-16 border-b border-[#E3E4F1] rounded-md mb-6 px-4 bg-white">

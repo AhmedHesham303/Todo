@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 function ThemeToggle({ isDark, setIsDark }) {
   const handelThemeClick = () => {
     document.documentElement.classList.toggle("dark");

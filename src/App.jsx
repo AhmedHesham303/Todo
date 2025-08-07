@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useQuery, useMutation } from "@tanstack/react-query";
 import TodosList from "./components/TodosList";
 import Header from "./components/Header";
 
