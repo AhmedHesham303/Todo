@@ -19,4 +19,7 @@
   .dark input {
     @apply bg-[#25273D];
   }
+  button:hover {
+    @apply cursor-pointer;
+  }
 }
