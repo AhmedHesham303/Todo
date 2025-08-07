@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
-
+function ThemeToggle({ isDark, setIsDark }) {
   const handelThemeClick = () => {
     document.documentElement.classList.toggle("dark");
     setIsDark((state) => !state);

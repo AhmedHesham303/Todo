@@ -2,7 +2,7 @@ import { useState } from "react";
 import TodoRowHeader from "./TodoRowHeader";
 import TodoRow from "./TodoRow";
 
-function TodosList() {
+function TodosList({ isDark }) {
   const [todos, setTodos] = useState([]);
   function addTodo(text) {
     if (text.trim() === "") return;
@@ -13,8 +13,6 @@ function TodosList() {
     setTodos((prevTodos) =>
       prevTodos.filter((_, index) => index !== indexToRemove)
     );
-    console.log(`item number ${indexToRemove + 1} deleted`);
-    console.log(todos);
   }
 
   return (
@@ -25,6 +23,7 @@ function TodosList() {
           key={index}
           text={todo.text}
           deleteTodo={() => deleteTodo(index)}
+          isDark={isDark}
         />
       ))}
     </div>
