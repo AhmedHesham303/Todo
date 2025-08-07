@@ -27,3 +27,14 @@ export async function createTodos(title) {
   const data = await res.json();
   return data;
 }
+
+export async function deleteTodos(id) {
+  try {
+    await fetch(`https://jsonplaceholder.typicode.com/todos`, {
+      method: "DELETE",
+    });
+  } catch (err) {
+    // ignore network errors for fake API
+  }
+  return id;
+}

@@ -21,7 +21,12 @@ function TodosList({ isDark }) {
         data
           ?.slice(-10)
           .map((todo, index) => (
-            <TodoRow key={index} text={todo.title} isDark={isDark} />
+            <TodoRow
+              key={index}
+              text={todo.title}
+              isDark={isDark}
+              id={todo.id}
+            />
           ))}
     </div>
   );
