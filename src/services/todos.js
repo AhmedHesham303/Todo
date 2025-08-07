@@ -29,6 +29,5 @@ export async function createTodos(title) {
     return data;
   } catch (err) {
     console.error("Mutation error:", err);
-    throw err;
   }
 }

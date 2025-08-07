@@ -35,7 +35,7 @@ function TodoRowHeader({ onShowTodos }) {
       </div>
       <button
         className="text-sm text-[#9495A5] hover:text-[#494C6B] transition-colors duration-200"
-        onClick={onShowTodos}
+        onClick={() => onShowTodos()}
       >
         Show all todos
       </button>

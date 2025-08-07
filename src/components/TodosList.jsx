@@ -9,18 +9,20 @@ function TodosList({ isDark }) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["todos"],
     queryFn: readTodos,
-    enabled: showTodos,
   });
 
   return (
     <div className="w-full">
-      <TodoRowHeader onShowTodos={() => setShowTodos(true)} />
+      <TodoRowHeader onShowTodos={() => setShowTodos((prev) => !prev)} />
       {isLoading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
 
-      {data?.slice(-10).map((todo, index) => (
-        <TodoRow key={index} text={todo.title} isDark={isDark} />
-      ))}
+      {showTodos &&
+        data
+          ?.slice(-10)
+          .map((todo, index) => (
+            <TodoRow key={index} text={todo.title} isDark={isDark} />
+          ))}
     </div>
   );
 }
