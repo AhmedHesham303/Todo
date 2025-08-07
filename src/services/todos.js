@@ -6,28 +6,24 @@ export async function readTodos() {
 }
 
 export async function createTodos(title) {
-  try {
-    const res = await fetch("https://jsonplaceholder.typicode.com/todos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: 11,
-        title: title,
-        completed: false,
-      }),
-    });
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId: 11,
+      title: title,
+      completed: false,
+    }),
+  });
 
-    if (!res.ok) {
-      const errText = await res.text();
-      console.error("Server error response:", errText);
-      throw new Error("Failed to create a todo");
-    }
-
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    console.error("Mutation error:", err);
+  if (!res.ok) {
+    const errText = await res.text();
+    console.error("Server error response:", errText);
+    throw new Error("Failed to create a todo");
   }
+
+  const data = await res.json();
+  return data;
 }
