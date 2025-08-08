@@ -38,6 +38,7 @@ function TodosList({ isDark }) {
               text={todo.title}
               isDark={isDark}
               id={todo.id}
+              completed={todo.completed}
             />
           ))}
       <TodoRowFooter

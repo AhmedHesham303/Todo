@@ -1,7 +1,9 @@
 import { RiDeleteBin6Line, RiDeleteBin6Fill } from "react-icons/ri";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
 import { deleteTodos } from "../services/todos";
-function TodoRow({ text, isDark, id }) {
+
+function TodoRow({ text, isDark, id, completed }) {
   const queryClient = useQueryClient();
 
   const deletedTodoMutation = useMutation({
@@ -17,8 +19,37 @@ function TodoRow({ text, isDark, id }) {
   return (
     <div className="flex items-center justify-between h-16 border-b border-[#E3E4F1] rounded-md mb-1 px-4 bg-white">
       <div className="flex items-center">
-        <div className="w-4 h-4 rounded-full border border-[#9495A5] mr-4"></div>
-        <div className="flex-1 bg-transparent outline-none text-sm">{text}</div>
+        <div
+          className={clsx(
+            "w-4 h-4 rounded-full border mr-4 flex items-center justify-center",
+            completed ? "bg-[#3A7CFD] border-[#3A7CFD]" : "border-[#9495A5]"
+          )}
+        >
+          {completed && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-3 w-3 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={3}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          )}
+        </div>
+        <div
+          className={clsx(
+            "flex-1 bg-transparent outline-none text-sm",
+            completed && "line-through text-[#9495A5]"
+          )}
+        >
+          {text}
+        </div>
       </div>
       {isDark ? (
         <RiDeleteBin6Fill
