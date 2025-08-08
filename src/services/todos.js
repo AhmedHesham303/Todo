@@ -34,7 +34,7 @@ export async function deleteTodos(id) {
   } catch (err) {
     console.error("Delete failed:", err);
   }
-  return id; // return id so we can remove it from cache
+  return id;
 }
 
 export async function toggleTodoCompleted(id, completed) {
@@ -49,10 +49,25 @@ export async function toggleTodoCompleted(id, completed) {
     );
     if (!res.ok) throw new Error("Failed to toggle");
 
-    await res.json(); // ignore actual response for fake API
+    await res.json();
     return id;
   } catch (err) {
     console.error(err);
+    throw err;
+  }
+}
+
+export async function clearCompleted() {
+  try {
+    await fetch(`https://jsonplaceholder.typicode.com/todos`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ completed: false }),
+    });
+
+    return true;
+  } catch (err) {
+    console.error("clearCompleted error:", err);
     throw err;
   }
 }
