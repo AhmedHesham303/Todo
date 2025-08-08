@@ -1,7 +1,8 @@
+import supabase from "./supabase";
 export async function readTodos() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
-  if (!res.ok) throw new Error("Failed to show todos");
-  return await res.json();
+  let { data: Todos, error } = await supabase.from("Todos").select("*");
+
+  return Todos;
 }
 
 export async function createTodos(title) {
