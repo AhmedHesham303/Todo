@@ -71,3 +71,18 @@ export async function clearCompleted() {
     throw err;
   }
 }
+
+export async function clearAll() {
+  try {
+    await fetch(`https://jsonplaceholder.typicode.com/todos`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({}),
+    });
+
+    return true;
+  } catch (err) {
+    console.error("clearAll error:", err);
+    throw err;
+  }
+}

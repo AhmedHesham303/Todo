@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { clearCompleted } from "../services/todos";
+import { clearCompleted, clearAll } from "../services/todos";
 import clsx from "clsx";
 
 function TodoRowFooter({ length, setFilter, filter }) {
   const queryClient = useQueryClient();
-  const clearMutation = useMutation({
+  const clearCompletedMutation = useMutation({
     mutationFn: clearCompleted,
     onSuccess: () => {
       queryClient.setQueryData(["todos"], (todos) => {
@@ -12,6 +12,14 @@ function TodoRowFooter({ length, setFilter, filter }) {
         return todos.map((todo) =>
           todo.completed ? { ...todo, completed: false } : todo
         );
+      });
+    },
+  });
+  const clearCAllMutation = useMutation({
+    mutationFn: clearAll,
+    onSuccess: () => {
+      queryClient.setQueryData(["todos"], () => {
+        return [];
       });
     },
   });
@@ -49,13 +57,20 @@ function TodoRowFooter({ length, setFilter, filter }) {
           Completed
         </button>
       </div>
-
-      <button
-        className="hover:text-[#494C6B] transition-colors duration-200"
-        onClick={() => clearMutation.mutate()}
-      >
-        Clear Completed
-      </button>
+      <div className="flex gap-2">
+        <button
+          className="hover:text-[#494C6B] transition-colors duration-200"
+          onClick={() => clearCompletedMutation.mutate()}
+        >
+          Clear Completed
+        </button>
+        <button
+          className="hover:text-[#494C6B] transition-colors duration-200"
+          onClick={() => clearCAllMutation.mutate()}
+        >
+          Clear All
+        </button>
+      </div>
     </div>
   );
 }
