@@ -3,12 +3,24 @@ import TodoRowHeader from "./TodoRowHeader";
 import TodoRow from "./TodoRow";
 import { useQuery } from "@tanstack/react-query";
 import { readTodos } from "../services/todos";
+import TodoRowFooter from "./TodoRowFooter";
 
 function TodosList({ isDark }) {
+  const [filter, setFilter] = useState("all");
   const [showTodos, setShowTodos] = useState(false);
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: todos = [],
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["todos"],
     queryFn: readTodos,
+  });
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true; // "all"
   });
 
   return (
@@ -18,16 +30,21 @@ function TodosList({ isDark }) {
       {error && <p>{error.message}</p>}
 
       {showTodos &&
-        data
-          ?.slice(-10)
-          .map((todo, index) => (
+        filteredTodos
+          .slice(-10)
+          .map((todo) => (
             <TodoRow
-              key={index}
+              key={todo.id}
               text={todo.title}
               isDark={isDark}
               id={todo.id}
             />
           ))}
+      <TodoRowFooter
+        length={filteredTodos.length}
+        setFilter={setFilter}
+        filter={filter}
+      />
     </div>
   );
 }
