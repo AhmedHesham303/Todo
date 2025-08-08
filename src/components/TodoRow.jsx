@@ -6,12 +6,12 @@ import { toggleTodoCompleted } from "../services/todos";
 
 function TodoRow({ text, isDark, id, completed }) {
   const queryClient = useQueryClient();
-
   const deletedTodoMutation = useMutation({
     mutationFn: deleteTodos,
     onSuccess: (deletedId) => {
       queryClient.setQueryData(["todos"], (oldTodos) => {
         if (!oldTodos) return [];
+        console.log(deletedId);
         return oldTodos.filter((todo) => todo.id !== deletedId);
       });
     },
