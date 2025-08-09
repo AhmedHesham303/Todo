@@ -1,7 +1,10 @@
 import supabase from "./supabase";
 export async function readTodos() {
   let { data: Todos, error } = await supabase.from("Todos").select("*");
-
+  if (error) {
+    console.log(error);
+    throw "Todos could not be loaded";
+  }
   return Todos;
 }
 
