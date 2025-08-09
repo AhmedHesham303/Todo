@@ -7,12 +7,7 @@ function TodoRowFooter({ length, setFilter, filter }) {
   const clearCompletedMutation = useMutation({
     mutationFn: clearCompleted,
     onSuccess: () => {
-      queryClient.setQueryData(["todos"], (todos) => {
-        if (!todos) return [];
-        return todos.map((todo) =>
-          todo.completed ? { ...todo, completed: false } : todo
-        );
-      });
+      queryClient.invalidateQueries(["todos"]);
     },
   });
   const clearCAllMutation = useMutation({

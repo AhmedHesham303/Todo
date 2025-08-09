@@ -67,17 +67,10 @@ export async function toggleTodoCompleted(id) {
 }
 
 export async function clearCompleted() {
-  try {
-    await fetch(`https://jsonplaceholder.typicode.com/todos`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ completed: false }),
-    });
-
-    return true;
-  } catch (err) {
-    console.error("clearCompleted error:", err);
-    throw err;
+  const { error } = await supabase.from("Todos").delete().eq("completed", true);
+  if (error) {
+    console.error("Error deleting completed todo:", error);
+    throw new Error(error.message);
   }
 }
 
