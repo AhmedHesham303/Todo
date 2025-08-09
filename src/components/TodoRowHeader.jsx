@@ -16,9 +16,7 @@ function TodoRowHeader({ onShowTodos }) {
     mutationFn: createTodos,
     onSuccess: (newTodo) => {
       queryClient.setQueryData(["todos"], (oldTodos) => {
-        const id = Date.now(); // generate unique id
-        const todoWithUniqueId = { ...newTodo, id };
-        return oldTodos ? [...oldTodos, todoWithUniqueId] : [todoWithUniqueId];
+        return oldTodos ? [...oldTodos, newTodo] : [newTodo];
       });
     },
   });

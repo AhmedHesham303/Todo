@@ -9,25 +9,24 @@ export async function readTodos() {
 }
 
 export async function createTodos(title) {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      userId: 11,
-      title,
-      completed: false,
-    }),
-  });
+  const { data, error } = await supabase
+    .from("Todos")
+    .insert([
+      {
+        title: title,
+        completed: false,
+        authorId: 1,
+        description: "new",
+      },
+    ])
+    .select();
 
-  if (!res.ok) {
-    const errText = await res.text();
-    console.error("Server error response:", errText);
-    throw new Error("Failed to create a todo");
+  if (error) {
+    console.error("Error inserting todo:", error);
+    throw new Error(error.message);
   }
 
-  return await res.json();
+  return data[0];
 }
 
 export async function deleteTodos(id) {
