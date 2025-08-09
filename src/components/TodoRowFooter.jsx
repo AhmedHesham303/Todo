@@ -34,8 +34,8 @@ function TodoRowFooter({ length, setFilter, filter }) {
         <button
           onClick={() => setFilter("active")}
           className={clsx(
-            "hover:text-[#3A7CFD]",
-            filter === "active" && "text-[#3A7CFD]"
+            "hover:text-[#6062D8]",
+            filter === "active" && "text-[#6062D8]"
           )}
         >
           Active
@@ -43,8 +43,8 @@ function TodoRowFooter({ length, setFilter, filter }) {
         <button
           onClick={() => setFilter("completed")}
           className={clsx(
-            "hover:text-[#3A7CFD]",
-            filter === "completed" && "text-[#3A7CFD]"
+            "hover:text-[#6062D8]",
+            filter === "completed" && "text-[#6062D8]"
           )}
         >
           Completed

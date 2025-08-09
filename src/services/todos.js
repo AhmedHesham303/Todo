@@ -11,15 +11,20 @@ export async function readTodos() {
   return Todos;
 }
 
-export async function createTodos(title) {
+export async function createTodos({
+  authorId,
+  taskTitle,
+  taskDescription,
+  completed,
+}) {
   const { data, error } = await supabase
     .from("Todos")
     .insert([
       {
-        title: title,
-        completed: false,
-        authorId: 1,
-        description: "new",
+        title: taskTitle,
+        completed,
+        authorId,
+        description: taskDescription,
       },
     ])
     .select();

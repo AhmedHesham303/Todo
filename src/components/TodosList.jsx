@@ -4,10 +4,12 @@ import TodoRow from "./TodoRow";
 import { useQuery } from "@tanstack/react-query";
 import { readTodos } from "../services/todos";
 import TodoRowFooter from "./TodoRowFooter";
+import TodoForm from "./TodoForm";
 
 function TodosList({ isDark }) {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   const [filter, setFilter] = useState("all");
-  const [showTodos, setShowTodos] = useState(false);
   const {
     data: todos = [],
     isLoading,
@@ -23,24 +25,23 @@ function TodosList({ isDark }) {
     return true;
   });
 
-  return (
+  return isFormOpen ? (
+    <TodoForm title={"Create a Todo"} setIsFormOpen={setIsFormOpen} />
+  ) : (
     <div className="w-full">
-      <TodoRowHeader onShowTodos={() => setShowTodos((prev) => !prev)} />
+      <TodoRowHeader setIsFormOpen={setIsFormOpen} />
       {isLoading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
 
-      {showTodos &&
-        filteredTodos
-          .slice(-10)
-          .map((todo) => (
-            <TodoRow
-              key={todo.id}
-              text={todo.title}
-              isDark={isDark}
-              id={todo.id}
-              completed={todo.completed}
-            />
-          ))}
+      {filteredTodos.slice(-10).map((todo) => (
+        <TodoRow
+          key={todo.id}
+          text={todo.title}
+          isDark={isDark}
+          id={todo.id}
+          completed={todo.completed}
+        />
+      ))}
       <TodoRowFooter
         length={filteredTodos.length}
         setFilter={setFilter}
