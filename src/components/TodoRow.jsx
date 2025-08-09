@@ -16,14 +16,8 @@ function TodoRow({ text, isDark, id, completed }) {
 
   const toggleTodoMutation = useMutation({
     mutationFn: toggleTodoCompleted,
-    onSuccess: (id) => {
-      queryClient.setQueryData(["todos"], (todos) => {
-        if (!todos) return [];
-
-        return todos.map((todo) =>
-          todo.id === id ? { ...todo, completed: !todo.completed } : todo
-        );
-      });
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
     },
   });
 
