@@ -1,6 +1,9 @@
 import supabase from "./supabase";
 export async function readTodos() {
-  let { data: Todos, error } = await supabase.from("Todos").select("*");
+  let { data: Todos, error } = await supabase
+    .from("Todos")
+    .select("*")
+    .order("created_at", { ascending: true }); // or created_at, or completed
   if (error) {
     console.log(error);
     throw "Todos could not be loaded";
