@@ -15,7 +15,7 @@ function TodoRowHeader({ onShowTodos }) {
   const createdTodo = useMutation({
     mutationFn: createTodos,
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries(["todos"]);
     },
   });
 

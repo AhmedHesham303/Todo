@@ -22,7 +22,7 @@ export async function createTodos(title) {
     .select();
 
   if (error) {
-    console.error("Error inserting todo:", error);
+    console.error("Error inserting a todo:", error);
     throw new Error(error.message);
   }
 
@@ -30,12 +30,10 @@ export async function createTodos(title) {
 }
 
 export async function deleteTodos(id) {
-  try {
-    await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-      method: "DELETE",
-    });
-  } catch (err) {
-    console.error("Delete failed:", err);
+  const { data, error } = await supabase.from("Todos").delete().eq("id", id);
+  if (error) {
+    console.error("Error deleting a todo:", error);
+    throw new Error(error.message);
   }
   return id;
 }

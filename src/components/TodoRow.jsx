@@ -5,15 +5,12 @@ import { deleteTodos } from "../services/todos";
 import { toggleTodoCompleted } from "../services/todos";
 
 function TodoRow({ text, isDark, id, completed }) {
+  console.log(id);
   const queryClient = useQueryClient();
-  const deletedTodoMutation = useMutation({
+  const deleteTodoMutation = useMutation({
     mutationFn: deleteTodos,
-    onSuccess: (deletedId) => {
-      queryClient.setQueryData(["todos"], (oldTodos) => {
-        if (!oldTodos) return [];
-        console.log(deletedId);
-        return oldTodos.filter((todo) => todo.id !== deletedId);
-      });
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
     },
   });
 
@@ -70,12 +67,12 @@ function TodoRow({ text, isDark, id, completed }) {
       {isDark ? (
         <RiDeleteBin6Fill
           className="hover:cursor-pointer"
-          onClick={() => deletedTodoMutation.mutate(id)}
+          onClick={() => deleteTodoMutation.mutate(id)}
         />
       ) : (
         <RiDeleteBin6Line
           className="hover:cursor-pointer"
-          onClick={() => deletedTodoMutation.mutate(id)}
+          onClick={() => deleteTodoMutation.mutate(id)}
         />
       )}
     </div>
