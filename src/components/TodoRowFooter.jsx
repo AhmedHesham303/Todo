@@ -18,9 +18,7 @@ function TodoRowFooter({ length, setFilter, filter }) {
   const clearCAllMutation = useMutation({
     mutationFn: clearAll,
     onSuccess: () => {
-      queryClient.setQueryData(["todos"], () => {
-        return [];
-      });
+      queryClient.invalidateQueries(["todos"]);
     },
   });
 

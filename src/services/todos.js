@@ -74,16 +74,9 @@ export async function clearCompleted() {
 }
 
 export async function clearAll() {
-  try {
-    await fetch(`https://jsonplaceholder.typicode.com/todos`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({}),
-    });
-
-    return true;
-  } catch (err) {
-    console.error("clearAll error:", err);
-    throw err;
+  const { error } = await supabase.from("Todos").delete().neq("id", 0);
+  if (error) {
+    console.error("Error clearing todos:", error);
+    throw new Error(error.message);
   }
 }
