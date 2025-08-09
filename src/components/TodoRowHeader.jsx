@@ -14,10 +14,8 @@ function TodoRowHeader({ onShowTodos }) {
 
   const createdTodo = useMutation({
     mutationFn: createTodos,
-    onSuccess: (newTodo) => {
-      queryClient.setQueryData(["todos"], (oldTodos) => {
-        return oldTodos ? [...oldTodos, newTodo] : [newTodo];
-      });
+    onSuccess: () => {
+      queryClient.invalidateQueries();
     },
   });
 
