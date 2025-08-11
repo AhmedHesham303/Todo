@@ -2,7 +2,7 @@ import { useState } from "react";
 import TodoRowHeader from "./TodoRowHeader";
 import TodoRow from "./TodoRow";
 import { useQuery } from "@tanstack/react-query";
-import { readTodos } from "../services/todos";
+import { readTodos } from "../../services/todos/readTodos";
 import TodoRowFooter from "./TodoRowFooter";
 import TodoForm from "./TodoForm";
 

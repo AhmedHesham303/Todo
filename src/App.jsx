@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TodosList from "./components/TodosList";
-import Header from "./components/Header";
+import TodosList from "./features/todo/TodosList";
+import Header from "./ui/Header";
 
 function App() {
   const [isDark, setIsDark] = useState(false);

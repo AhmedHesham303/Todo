@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { clearCompleted, clearAll } from "../services/todos";
+import { clearCompleted } from "../../services/todos/clearCompleted";
+import { clearAll } from "../../services/todos/clearAll";
 import clsx from "clsx";
 
 function TodoRowFooter({ length, setFilter, filter }) {

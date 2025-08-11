@@ -1,8 +1,8 @@
 import { RiDeleteBin6Line, RiDeleteBin6Fill } from "react-icons/ri";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
-import { deleteTodos } from "../services/todos";
-import { toggleTodoCompleted } from "../services/todos";
+import { deleteTodos } from "../../services/todos/deleteTodos";
+import { toggleTodoCompleted } from "../../services/todos/toggleTodoCompleted";
 
 function TodoRow({ text, isDark, id, completed }) {
   console.log(id);
