@@ -1,15 +1,15 @@
-import { useState } from "react";
-import TodosList from "./features/todo/TodosList";
-import Header from "./ui/Header";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import AppLayout from "./ui/AppLayout";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+  },
+]);
 function App() {
-  const [isDark, setIsDark] = useState(false);
-  return (
-    <div className="container w-[34rem] flex flex-col items-center justify-center">
-      <Header isDark={isDark} setIsDark={setIsDark} />
-      <TodosList isDark={isDark} />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
